@@ -1,0 +1,51 @@
+{
+  "name": "iconify-nextjs-ssr",
+  "version": "0.0.1",
+  "type": "module",
+  "description": "A lightweight utility package for rendering iconify icons on nextjs server and removes flickering on load.",
+  "types": "./dist/main.d.ts",
+  "module": "./dist/main.js",
+  "main": "./dist/main.cjs",
+  "exports": {
+    ".": {
+      "types": "./dist/main.d.ts",
+      "import": "./dist/main.js",
+      "require": "./dist/main.cjs"
+    }
+  },
+  "scripts": {
+    "prepublishOnly": "tsup",
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "clean": "rm -rf dist"
+  },
+  "files": [
+    "dist"
+  ],
+  "keywords": [
+    "iconify",
+    "nextjs",
+    "nextjs",
+    "icons",
+    "server render",
+    "iconify-ssr",
+    "react-server-component"
+  ],
+  "author": "",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/San1ay/next-react-theme.git"
+  },
+  "dependencies": {
+    "html-react-parser": "^5.2.5"
+  },
+  "devDependencies": {
+    "@types/react": "^19.1.8",
+    "tsup": "^8.5.0",
+    "typescript": "^5.8.3"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

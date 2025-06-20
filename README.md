@@ -4,16 +4,18 @@ A utility to render **[Iconify](https://iconify.design)** icons **server-side** 
 
 > **Note:**  
 > `StaticIconifyIcon` can be used as a drop-in replacement for `Icon` from `@iconify/react`.  
-> You can simply swap your imports:  
+> You can simply swap your imports:
+>
 > ```tsx
 > // Before
 > import { Icon } from "@iconify/react";
 >
 > // After
 > import { StaticIconifyIcon as Icon } from "iconify-nextjs-ssr";
-> // or 
-> import  Icon from "iconify-nextjs-ssr";
+> // or
+> import Icon from "iconify-nextjs-ssr";
 > ```
+>
 > The API is compatible for most common use cases.
 
 ---
@@ -22,7 +24,7 @@ A utility to render **[Iconify](https://iconify.design)** icons **server-side** 
 
 ## ✨ Features
 
-- ✅ Fully server-side rendering (SSR) compatible. Can be used inside client component in nextjs app router as well.
+- ✅ Fully server-side rendering (SSR) compatible. Can be used inside client component in nextjs app router as well by passing it as props [See](#in-a-client-component-app-router)
 - ✅ Eliminates client-side flicker
 - ✅ Optionally remove `width` and `height` attributes
 - ✅ Supports custom Iconify hosts
@@ -64,21 +66,36 @@ export default async function Page() {
 ### In a Client Component (App Router)
 
 ```tsx
-"use client";
+// icons.tsx
 import StaticIconifyIcon from "iconify-nextjs-ssr";
+export const skillsIcons = {
+  java: <StaticIconifyIcon icon="logos:java" width={28} height={28} />,
+  menu: <StaticIconifyIcon icon="logos:react" width={28} height={28} />,
+};
+```
 
-export default function Page() {
+```tsx
+// skills.tsx
+"use client";
+
+export default function SkillsClientComponent({
+  icons,
+}: {
+  icons: Record<string, React.ReactNode>;
+}) {
   return (
     <div className="p-4">
       <h1 className="text-xl font-bold mb-4">Rendered on the Client</h1>
-      <StaticIconifyIcon // this will be rendered on server
-        icon="logos:react"
-        className="w-12 h-12 text-blue-500"
-        removeDimensions
-      />
+      {icons.java}
+      {icons.react}
     </div>
   );
 }
+```
+
+```tsx
+// page.tsx
+<SkillsClientComponent icons={skillsIcons}>
 ```
 
 ---
@@ -99,8 +116,8 @@ Renders an Iconify SVG icon, SSR-safe.
 | `className`        | `string`           | `undefined`                  | CSS classes applied to the `<svg>`                     |
 | `removeDimensions` | `boolean`          | `false`                      | If true, strips `width` and `height` from the SVG      |
 | `host`             | `string`           | `https://api.iconify.design` | Iconify API host to fetch from                         |
-| `height`           | `number \| string` | `undefined`                  | Update SVG height (any units)                                     |
-| `width`            | `number \| string` | `undefined`                  | Update SVG width  (any units)                                   |
+| `height`           | `number \| string` | `undefined`                  | Update SVG height (any units)                          |
+| `width`            | `number \| string` | `undefined`                  | Update SVG width (any units)                           |
 
 ---
 
@@ -149,7 +166,7 @@ export default async function IconsRow() {
 | Client-side flicker     | ❌ Yes           | ✅ No                |
 | SSR support             | ❌ No            | ✅ Full              |
 | Async server rendering  | ❌ No            | ✅ Yes               |
-| Fully static compatible | ✅ Yes           | ✅ Yes               |
+| Fully static compatible | ❌ No            | ✅ Yes               |
 | Lightweight             | ❌ No            | ✅ Yes               |
 
 ---

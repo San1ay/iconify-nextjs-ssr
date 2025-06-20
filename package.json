@@ -1,6 +1,6 @@
 {
   "name": "iconify-nextjs-ssr",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "type": "module",
   "description": "A lightweight utility package for rendering iconify/svg icons on nextjs server and removes flickering on load.",
   "types": "./dist/main.d.ts",
